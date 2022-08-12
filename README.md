@@ -1,8 +1,8 @@
 # GraphAlgorithmsJava
-Atividade em Java da disciplina Algoritmos e Estruturas de Dados III - CSI 105
+Activity in Java of the Algorithms and Data Structures III discipline - CSI 105
 
 ______________________________________________________________________________
 
-Aula 1: Criação do grafo, da função de adicionar aresta, da função toString e da função de achar o grau.
+Class 1: Creation of the graph, the add edge function, the toString function and the degree find function.
 
-Aula 2: Criação das funções de achar maior grau, menor grau e o complemento.
+Class 2: Creation of functions to find highest degree, lowest degree and complement.
