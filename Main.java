@@ -1,7 +1,7 @@
-import java.io.*;
+import java.io.IOException;
 
 public class Main {
-  public static void main(String[] args) {
+  public static void main(String[] args) throws IOException {
     Graph g1 = new Graph(9);
     g1.addUnOrientedEdge(7, 5, 1);
     g1.addUnOrientedEdge(7, 1, 1);
@@ -13,6 +13,9 @@ public class Main {
     g1.addUnOrientedEdge(6, 8, 1);
     System.out.println(g1.bfs(7));
     System.out.println("Está conectado? " + g1.connected());
+    Graph g2 = new Graph("graph1.txt");
+    System.out.println(g2);
+    System.out.println(g1.nonOriented());
 
     /*
      * Graph g1 = new Graph(4);
