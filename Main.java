@@ -23,15 +23,11 @@ public class Main {
 //        g4.floydWarshall();
 
 
+//    GraphMatrix g4 = new GraphMatrix("graph3.txt");
+//    System.out.println(g4);
+//    g4.floydWarshall(0,3);
 
-
-    GraphMatrix g4 = new GraphMatrix("graph3.txt");
-    System.out.println(g4);
-    g4.floydWarshall(0,3);
-
-
-
-
+    
 //        Graph g1 =  new Graph(4);
 //        g1.addEdge(0,1,1);
 //        g1.addEdge(1,0,1);
