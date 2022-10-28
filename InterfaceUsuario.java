@@ -16,8 +16,6 @@ public class InterfaceUsuario {
     }
 
 
-
-
     public void arquivostext(){
         System.out.println("-------ARQUIVOS-------");
         System.out.println("1 - Toy");
@@ -38,6 +36,13 @@ public class InterfaceUsuario {
         System.out.println("5 - Maze40");
         System.out.println("6 - Maze50");
         System.out.println("7 - SAIR");
+    }
+    public void escolherInicio() {
+        System.out.println("Digite o valor inicial");
+
+    }
+    public void escolherFim(){
+        System.out.println("Digite o valor do fim");
     }
 
 }

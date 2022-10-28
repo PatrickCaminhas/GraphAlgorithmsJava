@@ -2,11 +2,15 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
+
+
+
   public static void main(String[] args) throws IOException {
     int opcao = -1;
     int segundaopcao = -1;
     int terceiraopcao = -1;
     GraphList grafolist;
+    int source=0, end=0;
 
     GraphMatrix grafomatriz;
 
@@ -29,40 +33,73 @@ public class Main {
                   switch (terceiraopcao){
                     //DIJKSTRA
                     case 1:
-                      grafomatriz= new GraphMatrix("toy.txt");
+                      grafolist= new GraphList("toy.txt");
+                      m.escolherInicio();
+                      source = leitor.nextInt();
+                      m.escolherFim();
+                      end = leitor.nextInt();
+                      System.out.println("Processando...");
                       tempoInicial = System.currentTimeMillis();
-                      grafomatriz.dijkstra(0);
+                      grafolist.dijkstra(source,end);
                       System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
 
                       break;
                     case 2:
-                      grafomatriz = new GraphMatrix("rg300_4730.txt");
+                      grafolist= new GraphList("rg300_4730.txt");
+                      m.escolherInicio();
+                      source = leitor.nextInt();
+                      m.escolherFim();
+                      end = leitor.nextInt();
+                      System.out.println("Processando...");
                       tempoInicial = System.currentTimeMillis();
-                      grafomatriz.dijkstra(0);
+                      grafolist.dijkstra(source,end);
                       System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
                       break;
                     case 3:
-                      grafomatriz = new GraphMatrix("rome99c.txt");
+                      grafolist= new GraphList("rome99c.txt");
+                      m.escolherInicio();
+                      source = leitor.nextInt();
+                      m.escolherFim();
+                      end = leitor.nextInt();
                       tempoInicial = System.currentTimeMillis();
-                      grafomatriz.dijkstra(0);
+                      grafolist.dijkstra(source,end);
                       System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
                       break;
                     case 4:
-                      grafomatriz = new GraphMatrix("facebook_combined.txt");
+                      grafolist= new GraphList("facebook_combined.txt");
+                      m.escolherInicio();
+                      source = leitor.nextInt();
+                      m.escolherFim();
+                      end = leitor.nextInt();
+                      System.out.println("Processando...");
                       tempoInicial = System.currentTimeMillis();
-                      grafomatriz.dijkstra(0);
+                      grafolist.dijkstra(source,end);
                       System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
                       break;
                     case 5:
-                      grafomatriz = new GraphMatrix("USAroaddtDC.txt");
+                      grafolist= new GraphList("USAroaddtDC.txt");
+                      m.escolherInicio();
+                      source = leitor.nextInt();
+                      m.escolherFim();
+                      end = leitor.nextInt();
+                      tempoInicial = System.currentTimeMillis();
+                      grafolist.dijkstra(source,end);
+                      System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
                       break;
                     case 6:
-                      grafomatriz = new GraphMatrix("USAroaddtNY.txt");
+                      grafolist = new GraphList("USAroaddtNY.txt");
+                      m.escolherInicio();
+                      source = leitor.nextInt();
+                      m.escolherFim();
+                      end = leitor.nextInt();
+                      System.out.println("Processando...");
+                      tempoInicial = System.currentTimeMillis();
+                      grafolist.dijkstra(source,end);
+                      System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
                       break;
                     case 7:
                       System.out.println("Saindo do algoritmo de Dijkstra...");
                       break;
-
                     default:
                       System.out.println("Opção incorreta. Tente novamente!");
 
@@ -76,40 +113,69 @@ public class Main {
                   switch (terceiraopcao){
                     //BELLMANFORD
                     case 1:
-                      grafolist = new GraphList("toy.txt");
+                      grafolist= new GraphList("toy.txt");
+                      m.escolherInicio();
+                      source = leitor.nextInt();
+                      m.escolherFim();
+                      end = leitor.nextInt();
+                      System.out.println("Processando...");
                       tempoInicial = System.currentTimeMillis();
-                      grafolist.bellmanFord(1);
+                      grafolist.bellmanFord(source,end);
                       System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
                       break;
                     case 2:
                       grafolist= new GraphList("rg300_4730.txt");
+                      m.escolherInicio();
+                      source = leitor.nextInt();
+                      m.escolherFim();
+                      end = leitor.nextInt();
+                      System.out.println("Processando...");
                       tempoInicial = System.currentTimeMillis();
-                      grafolist.bellmanFord(1);
+                      grafolist.bellmanFord(source,end);
                       System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
                       break;
                     case 3:
                       grafolist= new GraphList("rome99c.txt");
+                      m.escolherInicio();
+                      source = leitor.nextInt();
+                      m.escolherFim();
+                      end = leitor.nextInt();
+                      System.out.println("Processando...");
                       tempoInicial = System.currentTimeMillis();
-                      grafolist.bellmanFord(1);
+                      grafolist.bellmanFord(source,end);
                       System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
                       break;
                     case 4:
                       grafolist= new GraphList("facebook_combined.txt");
+                      m.escolherInicio();
+                      source = leitor.nextInt();
+                      m.escolherFim();
+                      end = leitor.nextInt();
+                      System.out.println("Processando...");
                       tempoInicial = System.currentTimeMillis();
-                      grafolist.bellmanFord(1);
+                      grafolist.bellmanFord(source,end);
                       System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
                       break;
                     case 5:
-                      grafolist = new GraphList("USAroaddtDC.txt");
+                      grafolist= new GraphList("USAroaddtDC.txt");
+                      m.escolherInicio();
+                      source = leitor.nextInt();
+                      m.escolherFim();
+                      end = leitor.nextInt();
+                      tempoInicial = System.currentTimeMillis();
+                      grafolist.bellmanFord(source,end);
+                      System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
                       break;
                     case 6:
                       grafolist = new GraphList("USAroaddtNY.txt");
+                      m.escolherInicio();
+                      source = leitor.nextInt();
+                      m.escolherFim();
+                      end = leitor.nextInt();
+                      System.out.println("Processando...");
                       tempoInicial = System.currentTimeMillis();
-                      grafolist.bellmanFord(1);
+                      grafolist.bellmanFord(source,end);
                       System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
-                      break;
-                    case 7:
-                      System.out.println("Saindo do algoritmo de Bellman-Ford...");
                       break;
 
                     default:
@@ -126,33 +192,69 @@ public class Main {
                     //FLOYDWARSHALL
                     case 1:
                       grafomatriz= new GraphMatrix("toy.txt");
+                      m.escolherInicio();
+                      source = leitor.nextInt();
+                      m.escolherFim();
+                      end = leitor.nextInt();
+                      System.out.println("Processando...");
                       tempoInicial = System.currentTimeMillis();
-                      grafomatriz.floydWarshall(0,100);
+                      grafomatriz.floydWarshall(source,end);
                       System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
                       break;
                     case 2:
                       grafomatriz = new GraphMatrix("rg300_4730.txt");
+                      m.escolherInicio();
+                      source = leitor.nextInt();
+                      m.escolherFim();
+                      end = leitor.nextInt();
+                      System.out.println("Processando...");
                       tempoInicial = System.currentTimeMillis();
-                      grafomatriz.floydWarshall(0,100);
+                      grafomatriz.floydWarshall(source,end);
                       System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
                       break;
                     case 3:
                       grafomatriz = new GraphMatrix("rome99c.txt");
+                      m.escolherInicio();
+                      source = leitor.nextInt();
+                      m.escolherFim();
+                      end = leitor.nextInt();
+                      System.out.println("Processando...");
                       tempoInicial = System.currentTimeMillis();
-                      grafomatriz.floydWarshall(0,100);
+                      grafomatriz.floydWarshall(source,end);
                       System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
                       break;
                     case 4:
                       grafomatriz = new GraphMatrix("facebook_combined.txt");
+                      m.escolherInicio();
+                      source = leitor.nextInt();
+                      m.escolherFim();
+                      end = leitor.nextInt();
+                      System.out.println("Processando...");
                       tempoInicial = System.currentTimeMillis();
-                      grafomatriz.floydWarshall(0,100);
+                      grafomatriz.floydWarshall(source,end);
                       System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
                       break;
                     case 5:
                       grafomatriz = new GraphMatrix("USAroaddtDC.txt");
+                      m.escolherInicio();
+                      source = leitor.nextInt();
+                      m.escolherFim();
+                      end = leitor.nextInt();
+                      System.out.println("Processando...");
+                      tempoInicial = System.currentTimeMillis();
+                      grafomatriz.floydWarshall(source,end);
+                      System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
                       break;
                     case 6:
                       grafomatriz = new GraphMatrix("USAroaddtNY.txt");
+                      m.escolherInicio();
+                      source = leitor.nextInt();
+                      m.escolherFim();
+                      end = leitor.nextInt();
+                      System.out.println("Processando...");
+                      tempoInicial = System.currentTimeMillis();
+                      grafomatriz.floydWarshall(source,end);
+                      System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
                       break;
                     case 7:
                       System.out.println("Saindo do algoritmo de Floyd-Warshall...");
@@ -172,35 +274,62 @@ public class Main {
                     //BELLMANFORD MELHORADO
                     case 1:
                       grafolist= new GraphList("toy.txt");
+                      m.escolherInicio();
+                      source = leitor.nextInt();
+                      m.escolherFim();
+                      end = leitor.nextInt();
                       tempoInicial = System.currentTimeMillis();
-                      grafolist.improvedBellmanFord(1);
+                      grafolist.improvedBellmanFord(source,end);
                       System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
                       break;
                     case 2:
                       grafolist= new GraphList("rg300_4730.txt");
+                      m.escolherInicio();
+                      source = leitor.nextInt();
+                      m.escolherFim();
+                      end = leitor.nextInt();
                       tempoInicial = System.currentTimeMillis();
-                      grafolist.improvedBellmanFord(1);
+                      grafolist.improvedBellmanFord(source,end);
                       System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
                       break;
                     case 3:
-                      grafolist = new GraphList("rome99c.txt");
+                      grafolist= new GraphList("rome99c.txt");
+                      m.escolherInicio();
+                      source = leitor.nextInt();
+                      m.escolherFim();
+                      end = leitor.nextInt();
                       tempoInicial = System.currentTimeMillis();
-                      grafolist.improvedBellmanFord(1);
+                      grafolist.improvedBellmanFord(source,end);
                       System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
                       break;
                     case 4:
                       grafolist= new GraphList("facebook_combined.txt");
+                      m.escolherInicio();
+                      source = leitor.nextInt();
+                      m.escolherFim();
+                      end = leitor.nextInt();
                       tempoInicial = System.currentTimeMillis();
-                      grafolist.improvedBellmanFord(1);
+                      grafolist.improvedBellmanFord(source,end);
                       System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
                       break;
                     case 5:
-                      grafolist = new GraphList("USAroaddtDC.txt");
+                      grafolist= new GraphList("USAroaddtDC.txt");
+                      m.escolherInicio();
+                      source = leitor.nextInt();
+                      m.escolherFim();
+                      end = leitor.nextInt();
+                      tempoInicial = System.currentTimeMillis();
+                      grafolist.improvedBellmanFord(source,end);
+                      System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
                       break;
                     case 6:
                       grafolist = new GraphList("USAroaddtNY.txt");
+                      m.escolherInicio();
+                      source = leitor.nextInt();
+                      m.escolherFim();
+                      end = leitor.nextInt();
                       tempoInicial = System.currentTimeMillis();
-                      grafolist.improvedBellmanFord(1);
+                      grafolist.improvedBellmanFord(source,end);
                       System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
                       break;
                     case 7:

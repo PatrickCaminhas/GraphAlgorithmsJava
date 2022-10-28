@@ -245,65 +245,44 @@ public class GraphMatrix {
 
 
 
-  public void floydWarshall(int s, int t){
+  public void floydWarshall(int s, int t) {
     int[][] dist = new int[this.countNodes][this.countNodes];
     int[][] pred = new int[this.countNodes][this.countNodes];
-    for(int i=0; i< this.adjMatrix.length; i++){
-      for(int j=0; j < this.adjMatrix[i].length; j++){
-        if( i == j)
-        {
-          dist[i][j]=0;
-          pred[i][j]=-1;
+    for (int i = 0; i < this.adjMatrix.length; ++i) {
+      for (int j = 0; j < this.adjMatrix[i].length; ++j) {
+        if (i == j) {
+          dist[i][j] = 0;
+          pred[i][j] = -1;
+        } else if (this.adjMatrix[i][j] != 0) { // Edge (i, j) exists
+          dist[i][j] = this.adjMatrix[i][j];
+          pred[i][j] = i;
+        } else {
+          dist[i][j] = INF;
+          pred[i][j] = -1;
         }
-        else if(this.adjMatrix[i][j]!= 0)
-        {
-          dist[i][j]=this.adjMatrix[i][j];
-          pred[i][j]=i;
-        }
-        else
-        {
-          dist[i][j]=INF;
-          pred[i][j]= -1;
-        }
-
       }
     }
-
-    for(int k = 0; k < this.countNodes; k++){
-      for(int i = 0; i < this.countNodes; i++){
-        for(int j = 0; j < this.countNodes; j++){
-          if(dist[i][j]> dist[i][k] + dist[k][j]){
-            dist[i][j]= dist[i][k] + dist[k][j];
-            pred[i][j]= pred[k][j];
+    for (int k = 0; k < this.countNodes; ++k) {
+      for (int i = 0; i < this.countNodes; ++i) {
+        for (int j = 0; j < this.countNodes; ++j) {
+          if (dist[i][j] > dist[i][k] + dist[k][j]) {
+            dist[i][j] = dist[i][k] + dist[k][j];
+            pred[i][j] = pred[k][j];
           }
         }
       }
     }
-    System.out.println("DIST: ");
-    for(int i=0; i<this.adjMatrix.length; i++){
-      for(int j = 0; j < this.adjMatrix[i].length; j++){
-        System.out.print(dist[i][j]+ "\t" );
-      }
-      System.out.println();
-    }
-
-    System.out.println("\nPRED: ");
-
-    for(int i=0; i<this.adjMatrix.length; i++){
-      for(int j = 0; j < this.adjMatrix[i].length; j++){
-        System.out.print(pred[i][j]+ "\t");
-      }
-      System.out.println();
-    }
-    System.out.printf("Distancia de %d  a %d e: %d \n", s,t,dist[s][t]);
+    // Recovering paths
+    System.out.printf("Distance from %d to %d is: %d", s, t, dist[s][t]);
     ArrayList<Integer> C = new ArrayList<Integer>();
     C.add(t);
-    int aux= t;
-    while (aux !=s){
+    int aux = t;
+    while (aux != s) {
       aux = pred[s][aux];
-      C.add(0,aux);
+      C.add(0, aux);
     }
-    System.out.println("Path: "+ C);
+    System.out.println("Path: " + C);
+
   }
   ///////////////////////////////////////
   public void nearestNeighbor(final int[][] distanceMatrix, final int startCity){
@@ -359,42 +338,8 @@ public class GraphMatrix {
 
 
 
-  void dijkstra(int origem) {
-    int dist[] = new int[this.countNodes];
 
 
-    int pred[] = new int[this.countNodes];
-
-
-    for (int i = 0; i < this.countNodes; i++) {
-      dist[i] = INF;
-    }
-    dist[origem] = 0;
-
-    for (int i = 0; i < this.countNodes - 1; i++) {
-
-
-
-      int min = INF, posicaoMinima = -1;
-      for (int p = 0; p < this.countNodes; p++) {
-        if (dist[p] <= min) {
-          min = dist[p];
-          posicaoMinima = p;
-        }
-      }
-      int u= posicaoMinima;
-
-      for (int j = 0; j < this.countNodes; j++){
-        if (this.adjMatrix[u][j] != 0 && dist[u] != INF && dist[u]+ this.adjMatrix[u][j] < dist[j]) {
-          dist[j] = dist[u] + this.adjMatrix[u][j];
-          pred[j]=dist[j];
-        }
-      }
-    }
-    System.out.println("Vertice \t MENOR DISTANCIA DA ORIGEM "+ origem);
-    for (int i = 0; i < this.countNodes; i++)
-      System.out.println(i + " \t\t\t " + dist[i]);
-  }
 
 
 }

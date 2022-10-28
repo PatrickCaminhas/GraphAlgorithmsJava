@@ -2,11 +2,17 @@ public class Edge implements Comparable<Edge>  {
     private int source;
     private int sink;
     private int weight;
+    private int path;
+    private int wall;
 
     public Edge(int source, int sink, int weight){
         this.source=source;
         this.sink=sink;
         this.weight=weight;
+    }
+    public Edge( int path, int wall){
+        this.path=path;
+        this.wall=wall;
     }
 
     public int getSource() {

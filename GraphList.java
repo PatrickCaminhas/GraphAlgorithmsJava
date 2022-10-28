@@ -389,91 +389,144 @@ public class GraphList {
 
     }
 */
-void bellmanFord( int src)
-{
-    int V = this.countNodes;
-    int E = this.countEdges;
-    int dist[] = new int[V];
+public void bellmanFord(int source, int end){
+    long start = System.currentTimeMillis();
+    int[] pred = new int[this.countNodes];
+    int[] dist = new int[this.countNodes];
 
+    for (int i = 0; i < this.countNodes; i++) {
+        dist[i] = INF;
+        pred[i] = -1;
+    }
+    dist[source] = 0;
 
-    for (int i = 0; i < V; i++)
-        dist[i] = Integer.MAX_VALUE;
-    dist[src] = 0;
-
-
-    for (int i = 1; i < V; ++i) {
-        for (int j = 0; j < E; ++j) {
-            int u = this.edgeList.get(j).getSource();
-            int v = this.edgeList.get(j).getSink();
-            int weight = this.edgeList.get(j).getWeight();
-            if (dist[u] != INF && dist[u] + weight < dist[v])
-                dist[v] = dist[u] + weight;
+    for (int i = 0; i < this.countNodes; i++) {
+        for (Edge edge : edgeList) {
+            if (dist[edge.getSink()] > dist[edge.getSource()] + edge.getWeight()) {
+                dist[edge.getSink()] = dist[edge.getSource()] + edge.getWeight();
+                pred[edge.getSink()] = edge.getSource();
+            }
         }
     }
 
-    for (int j = 0; j < E; ++j) {
-        int u = this.edgeList.get(j).getSource();
-        int v = this.edgeList.get(j).getSink();
-        int weight = this.edgeList.get(j).getWeight();
-        if (dist[u] != INF && dist[u] + weight < dist[v]) {
-            System.out.println("O grafo tem ciclo de peso negativo");
-            return;
-        }
+
+    System.out.printf("Distância entre %d e %d: %d   ", source,end,dist[end]);
+    ArrayList<Integer> caminho = new ArrayList<Integer>();
+    int aux = end;
+    caminho.add(end);
+    while(aux != source){
+        aux = pred[aux];
+        caminho.add(0,aux);
     }
-    System.out.println("Distância do vértice da fonte");
-    for (int i = 0; i < V; ++i)
-        System.out.println(i + "\t\t" + dist[i]);
+    System.out.println("Caminho: " + caminho);
+
+    long elapsed = System.currentTimeMillis() - start;
+    System.out.println("\nTempo de execução: " + elapsed + " ms");
 }
 
-    void improvedBellmanFord( int src)
-    {
-        int V = this.countNodes;
-        int E = this.countEdges;
-        int dist[] = new int[this.countNodes];
-        int pred[] = new int[this.countNodes];
-        boolean trocou;
 
-
-        for (int i = 0; i < this.countNodes; i++)
+    public void improvedBellmanFord(int s, int t){
+        long start = System.currentTimeMillis();
+        int[] pred = new int[this.countNodes];
+        int[] dist = new int[this.countNodes];
+        boolean trocou=false;
+        for (int i = 0; i < this.countNodes; i++) {
             dist[i] = INF;
-        dist[src] = 0;
+            pred[i] = -1;
+        }
+        dist[s] = 0;
 
-        for (int i = 1; i < V; ++i) {
+        for (int i = 0; i < this.countNodes; i++) {
             trocou=false;
-            for (int j = 0; j < E; ++j) {
-                int u = this.edgeList.get(j).getSource();
-                int v = this.edgeList.get(j).getSink();
-                int weight = this.edgeList.get(j).getWeight();
-                if (dist[u] != INF && dist[u] + weight < dist[v]) {
-                    dist[v] = dist[u] + weight;
+            for (Edge edge : edgeList) {
+                if (dist[edge.getSink()] > dist[edge.getSource()] + edge.getWeight()) {
+                    dist[edge.getSink()] = dist[edge.getSource()] + edge.getWeight();
+                    pred[edge.getSink()] = edge.getSource();
                     trocou=true;
                 }
             }
-            if(trocou=false){
-                break;
+        }
+
+
+        System.out.printf("Distância entre %d e %d: %d   ", s,t,dist[t]);
+        ArrayList<Integer> caminho = new ArrayList<Integer>();
+        int aux = t;
+        caminho.add(t);
+        while(aux != s){
+            aux = pred[aux];
+            caminho.add(0,aux);
+        }
+        System.out.println("Caminho: " + caminho);
+
+        long elapsed = System.currentTimeMillis() - start;
+        System.out.println("\nTempo de execução: " + elapsed + " ms");
+    }
+
+
+    public int menorDistanciaList(int dist[],  ArrayList<Integer> q) {
+
+        int shortest = dist[q.get(0)];
+        int u = q.get(0);
+
+        for (int i = 0; i < this.countNodes; i++) {
+            if(q.contains(i)){
+                if(dist[i] < shortest){
+                    shortest = dist[i];
+                    u = i;
+                }
+            }
+        }
+        return u;
+    }
+
+    public void dijkstra(int source, int sink) {
+        ArrayList<Integer> q = new ArrayList<Integer>();
+        int[] pred = new int[this.countNodes];
+        int[] dist = new int[this.countNodes];
+
+        for (int i = 0; i < this.countNodes; i++) {
+            q.add(i);
+            dist[i] = INF;
+
+        }
+
+        dist[source] = 0;
+
+        while(q.size()!=0){
+            Integer u = menorDistanciaList(dist,q);
+            q.remove(u);
+
+            for (int i = 0; i < this.adjList.get(u).size(); i++) {
+                if(dist[this.adjList.get(u).get(i).getSink()] > dist[u] + this.adjList.get(u).get(i).getWeight()){
+                    dist[this.adjList.get(u).get(i).getSink()] = dist[u] + this.adjList.get(u).get(i).getWeight();
+                    pred[this.adjList.get(u).get(i).getSink()] = u;
+                }
             }
         }
 
 
-        for (int j = 0; j < E; ++j) {
-            int u = this.edgeList.get(j).getSource();
-            int v = this.edgeList.get(j).getSink();
-            int weight = this.edgeList.get(j).getWeight();
-            if (dist[u] != INF && dist[u] + weight < dist[v]) {
-                System.out.println("O grafo tem ciclo de peso negativo");
-                return;
-            }
+        System.out.printf("Distância entre %d e %d: %d   ", source,sink,dist[sink]);
+        ArrayList<Integer> caminho = new ArrayList<Integer>();
+        int aux = sink;
+        caminho.add(sink);
+        while(aux != source){
+            aux = pred[aux];
+            caminho.add(0,aux);
         }
-        System.out.println("Distância do vértice da fonte");
-        for (int i = 0; i < V; ++i)
-            System.out.println(i + "\t\t" + dist[i]);
+        System.out.println("Caminho: " + caminho);
+
+    }
+
+
+
     }
 
 
 
 
 
-}
+
+
 
 
 
