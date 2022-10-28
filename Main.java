@@ -1,48 +1,268 @@
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Main {
   public static void main(String[] args) throws IOException {
-//        Graph g1 =  new Graph(9);
-//        g1.addUnOrientedEdge(7,5,1);
-//        g1.addUnOrientedEdge(7,1,1);
-//        g1.addUnOrientedEdge(7,2,1);
-//        g1.addUnOrientedEdge(1,0,1);
-//        g1.addUnOrientedEdge(1,4,1);
-//        g1.addUnOrientedEdge(2,3,1);
-//        g1.addUnOrientedEdge(5,6,1);
-//        g1.addUnOrientedEdge(6,8,1);
-//        System.out.println(g1.bfs(7));
-//        System.out.println(g1);
-//        System.out.println("Está conectado? "+g1.connected());
-//            Graph g2 = new Graph("graph1.txt");
-//        System.out.println(g2);
-//        System.out.println(("não orientado: "+g1.notOriented()));
-//        Graph g3 = new Graph(3);
-//        Graph g4 = new Graph("graph2.txt");
-//        System.out.println(g4);
-//        g4.floydWarshall();
+    int opcao = -1;
+    int segundaopcao = -1;
+    int terceiraopcao = -1;
+    GraphList grafolist;
+
+    GraphMatrix grafomatriz;
+
+    Scanner leitor = new Scanner(System.in);
+    InterfaceUsuario m = new InterfaceUsuario();
+    long tempoInicial = System.currentTimeMillis();
+    do {
+      m.menutext();
+      opcao = leitor.nextInt();
+      switch (opcao) {
+        case 1:
+          do{
+            m.caminhotext();
+            segundaopcao=leitor.nextInt();
+            switch (segundaopcao){
+              case 1:
+                do{
+                  m.arquivostext();
+                  terceiraopcao=leitor.nextInt();
+                  switch (terceiraopcao){
+                    //DIJKSTRA
+                    case 1:
+                      grafomatriz= new GraphMatrix("toy.txt");
+                      tempoInicial = System.currentTimeMillis();
+                      grafomatriz.dijkstra(0);
+                      System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
+
+                      break;
+                    case 2:
+                      grafomatriz = new GraphMatrix("rg300_4730.txt");
+                      tempoInicial = System.currentTimeMillis();
+                      grafomatriz.dijkstra(0);
+                      System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
+                      break;
+                    case 3:
+                      grafomatriz = new GraphMatrix("rome99c.txt");
+                      tempoInicial = System.currentTimeMillis();
+                      grafomatriz.dijkstra(0);
+                      System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
+                      break;
+                    case 4:
+                      grafomatriz = new GraphMatrix("facebook_combined.txt");
+                      tempoInicial = System.currentTimeMillis();
+                      grafomatriz.dijkstra(0);
+                      System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
+                      break;
+                    case 5:
+                      grafomatriz = new GraphMatrix("USAroaddtDC.txt");
+                      break;
+                    case 6:
+                      grafomatriz = new GraphMatrix("USAroaddtNY.txt");
+                      break;
+                    case 7:
+                      System.out.println("Saindo do algoritmo de Dijkstra...");
+                      break;
+
+                    default:
+                      System.out.println("Opção incorreta. Tente novamente!");
+
+                  }
+                }while(terceiraopcao!=7);
+                break;
+              case 2:
+                do{
+                  m.arquivostext();
+                  terceiraopcao=leitor.nextInt();
+                  switch (terceiraopcao){
+                    //BELLMANFORD
+                    case 1:
+                      grafolist = new GraphList("toy.txt");
+                      tempoInicial = System.currentTimeMillis();
+                      grafolist.bellmanFord(1);
+                      System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
+                      break;
+                    case 2:
+                      grafolist= new GraphList("rg300_4730.txt");
+                      tempoInicial = System.currentTimeMillis();
+                      grafolist.bellmanFord(1);
+                      System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
+                      break;
+                    case 3:
+                      grafolist= new GraphList("rome99c.txt");
+                      tempoInicial = System.currentTimeMillis();
+                      grafolist.bellmanFord(1);
+                      System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
+                      break;
+                    case 4:
+                      grafolist= new GraphList("facebook_combined.txt");
+                      tempoInicial = System.currentTimeMillis();
+                      grafolist.bellmanFord(1);
+                      System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
+                      break;
+                    case 5:
+                      grafolist = new GraphList("USAroaddtDC.txt");
+                      break;
+                    case 6:
+                      grafolist = new GraphList("USAroaddtNY.txt");
+                      tempoInicial = System.currentTimeMillis();
+                      grafolist.bellmanFord(1);
+                      System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
+                      break;
+                    case 7:
+                      System.out.println("Saindo do algoritmo de Bellman-Ford...");
+                      break;
+
+                    default:
+                      System.out.println("Opção incorreta. Tente novamente!");
+
+                  }
+                }while(terceiraopcao!=7);
+                break;
+              case 3:
+                do{
+                  m.arquivostext();
+                  terceiraopcao=leitor.nextInt();
+                  switch (terceiraopcao){
+                    //FLOYDWARSHALL
+                    case 1:
+                      grafomatriz= new GraphMatrix("toy.txt");
+                      tempoInicial = System.currentTimeMillis();
+                      grafomatriz.floydWarshall(0,100);
+                      System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
+                      break;
+                    case 2:
+                      grafomatriz = new GraphMatrix("rg300_4730.txt");
+                      tempoInicial = System.currentTimeMillis();
+                      grafomatriz.floydWarshall(0,100);
+                      System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
+                      break;
+                    case 3:
+                      grafomatriz = new GraphMatrix("rome99c.txt");
+                      tempoInicial = System.currentTimeMillis();
+                      grafomatriz.floydWarshall(0,100);
+                      System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
+                      break;
+                    case 4:
+                      grafomatriz = new GraphMatrix("facebook_combined.txt");
+                      tempoInicial = System.currentTimeMillis();
+                      grafomatriz.floydWarshall(0,100);
+                      System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
+                      break;
+                    case 5:
+                      grafomatriz = new GraphMatrix("USAroaddtDC.txt");
+                      break;
+                    case 6:
+                      grafomatriz = new GraphMatrix("USAroaddtNY.txt");
+                      break;
+                    case 7:
+                      System.out.println("Saindo do algoritmo de Floyd-Warshall...");
+                      break;
+
+                    default:
+                      System.out.println("Opção incorreta. Tente novamente!");
+
+                  }
+                }while(terceiraopcao!=7);
+                break;
+              case 4:
+                do{
+                  m.arquivostext();
+                  terceiraopcao=leitor.nextInt();
+                  switch (terceiraopcao){
+                    //BELLMANFORD MELHORADO
+                    case 1:
+                      grafolist= new GraphList("toy.txt");
+                      tempoInicial = System.currentTimeMillis();
+                      grafolist.improvedBellmanFord(1);
+                      System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
+                      break;
+                    case 2:
+                      grafolist= new GraphList("rg300_4730.txt");
+                      tempoInicial = System.currentTimeMillis();
+                      grafolist.improvedBellmanFord(1);
+                      System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
+                      break;
+                    case 3:
+                      grafolist = new GraphList("rome99c.txt");
+                      tempoInicial = System.currentTimeMillis();
+                      grafolist.improvedBellmanFord(1);
+                      System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
+                      break;
+                    case 4:
+                      grafolist= new GraphList("facebook_combined.txt");
+                      tempoInicial = System.currentTimeMillis();
+                      grafolist.improvedBellmanFord(1);
+                      System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
+                      break;
+                    case 5:
+                      grafolist = new GraphList("USAroaddtDC.txt");
+                      break;
+                    case 6:
+                      grafolist = new GraphList("USAroaddtNY.txt");
+                      tempoInicial = System.currentTimeMillis();
+                      grafolist.improvedBellmanFord(1);
+                      System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
+                      break;
+                    case 7:
+                      System.out.println("Saindo do algoritmo de Bellman-Ford melhorado...");
+                      break;
+
+                    default:
+                      System.out.println("Opção incorreta. Tente novamente!");
+
+                  }
+                }while(terceiraopcao!=7);
+                break;
+              case 5:
+                break;
+              default:
+            }
+          }while(segundaopcao!=5);
+
+          break;
+        case 2:
+          do{
+            m.labirintotext();
+            segundaopcao=leitor.nextInt();
+            System.out.println("FUNÇÃO A SER IMPLEMENTADA");
+            switch (segundaopcao){
+              //LABIRINTO
+              case 1:
+                System.out.println("CAMINHO 1 NÃO USADO");
+                break;
+              case 2:
+                System.out.println("CAMINHO 2 NÃO USADO");
+                break;
+              case 3:
+                System.out.println("CAMINHO 3 NÃO USADO");
+                break;
+              case 4:
+                System.out.println("CAMINHO 4 NÃO USADO");
+                break;
+              case 5:
+                System.out.println("CAMINHO 5 NÃO USADO");
+                break;
+              case 6:
+                System.out.println("CAMINHO 5 NÃO USADO");
+                break;
+              case 7:
+                System.out.println("Saindo algoritmo do labirinto...");
+                break;
+
+              default:
+            }
+          }while(segundaopcao!=7);
 
 
-//    GraphMatrix g4 = new GraphMatrix("graph3.txt");
-//    System.out.println(g4);
-//    g4.floydWarshall(0,3);
 
-    
-//        Graph g1 =  new Graph(4);
-//        g1.addEdge(0,1,1);
-//        g1.addEdge(1,0,1);
-//        g1.addEdge(0,3,1);
-//        g1.addEdge(3,0,1);
-//        g1.addEdge(3,4,1); //AVISO
-//        System.out.println(g1);
-//        System.out.println(g1.degree(0));
-//        System.out.println(g1.degree(1));
-//        System.out.println(g1.degree(2));
-//        System.out.println(g1.degree(3));
-//        System.out.println("MAIOR GRAU: "+g1.highestDegree());
-//        System.out.println("MENOR GRAU: "+g1.lowestDegree());
-//        System.out.println(g1.complement());
-//        System.out.println(g1.density());
-
+          break;
+        case 3:
+          System.out.println("Saindo...");
+          break;
+        default:
+          System.out.println("OPCAO INCORRETA!!!");
+          break;
+      }
+    } while (opcao != 3);
   }
 }

@@ -10,6 +10,7 @@ public class GraphMatrix {
   private int countEdges;
   private int[][] adjMatrix;
   private static int INF = 9999;
+  int[] path;
 
 
   public GraphMatrix(int countNodes) {
@@ -153,7 +154,7 @@ public class GraphMatrix {
     ArrayList<Integer> R = new ArrayList<>();
     R.add(s);
     desc[s] = 1;
-    while (Q.size()>0) {
+    while (Q.size()>0)
       {
         int u=Q.remove(0);
         for(int v = 0; v<this.adjMatrix[u].length; v++)
@@ -169,18 +170,12 @@ public class GraphMatrix {
           }
         }
       }
-    }
     return R;
   }
 
-  public void addUnOrientedEdge(int u, int v, int w) {
-    if (u < 0 || u > this.countNodes - 1 || v < 0 || v > this.countNodes - 1 || w <= 0) {
-      System.err.println("Invalid edge: " + u + " " + v + " " + w);
-      return;
-    }
-    this.adjMatrix[u][v] = w;
-    this.adjMatrix[v][u] = w;
-    this.countEdges+=2;
+  public void addUnOrientedEdge(int source, int sink, int weight) {
+    addEdge(source, sink, weight);
+    addEdge(sink, source, weight);
   }
 
   public boolean connected(){
@@ -195,7 +190,6 @@ public class GraphMatrix {
     R.add(s);
     desc[s] = 1;
     while (S.size()>0) {
-      {
         int u=S.get(S.size()-1);
         boolean unstack = true; //desempilhar
         for(int v = 0; v<this.adjMatrix[u].length; v++)
@@ -211,21 +205,20 @@ public class GraphMatrix {
         if(unstack){
           S.remove(S.size()-1);
         }
-      }
     }
     return R;
   }
 
-  public boolean notOriented(){
+  public boolean isOriented(){
 
     for(int i=0; i < this.adjMatrix.length;i++){
       for(int j=i+1; j < this.adjMatrix[i].length;j++) {
         if (this.adjMatrix[i][j] != this.adjMatrix[j][i]) {
-          return false;
+          return true;
         }
       }
     }
-    return true;
+    return false;
   }
 
   public ArrayList<Integer> dfs_Rec(int s){
@@ -312,6 +305,97 @@ public class GraphMatrix {
     }
     System.out.println("Path: "+ C);
   }
+  ///////////////////////////////////////
+  public void nearestNeighbor(final int[][] distanceMatrix, final int startCity){
+
+    path = new int[distanceMatrix[0].length];
+    for (int i = 0; i < path.length; i ++){
+      path[i] = Integer.MAX_VALUE;
+    }
+    path[0] = startCity;
+    int currentCity = startCity;
+    int i = 1;
+    while (i < path.length) {
+      int nextCity = findMin(distanceMatrix[currentCity]);
+      if (nextCity != -1) {
+        path[i] = nextCity;
+        currentCity = nextCity;
+        i++;
+      }
+    }
+  }
+
+  private int findMin(int[] row) {
+//encontro o menor custo
+//na linha passada por parametro (int[] row)
+    int proximaCidade = -1;
+    int i = 0;
+    int min = Integer.MAX_VALUE;
+
+    while (i < row.length) {
+//se a cidade não está no caminho e o custo dela for menor que min
+//min passa a ser o custo de row[i] e a proxima cidade passa a ser i
+      if (!isCityInPath(path, i) && row[i] < min) {
+        min = row[i];
+        proximaCidade = i;
+      }
+      i++;
+    }
+    return proximaCidade;
+  }
+  public int[] getPath() {
+    return path;
+  }
+  public boolean isCityInPath(int[] path, int city) {
+    for (int i = 0; i < path.length; i++) {
+      if (path[i] == city) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+
+
+
+
+  void dijkstra(int origem) {
+    int dist[] = new int[this.countNodes];
+
+
+    int pred[] = new int[this.countNodes];
+
+
+    for (int i = 0; i < this.countNodes; i++) {
+      dist[i] = INF;
+    }
+    dist[origem] = 0;
+
+    for (int i = 0; i < this.countNodes - 1; i++) {
+
+
+
+      int min = INF, posicaoMinima = -1;
+      for (int p = 0; p < this.countNodes; p++) {
+        if (dist[p] <= min) {
+          min = dist[p];
+          posicaoMinima = p;
+        }
+      }
+      int u= posicaoMinima;
+
+      for (int j = 0; j < this.countNodes; j++){
+        if (this.adjMatrix[u][j] != 0 && dist[u] != INF && dist[u]+ this.adjMatrix[u][j] < dist[j]) {
+          dist[j] = dist[u] + this.adjMatrix[u][j];
+          pred[j]=dist[j];
+        }
+      }
+    }
+    System.out.println("Vertice \t MENOR DISTANCIA DA ORIGEM "+ origem);
+    for (int i = 0; i < this.countNodes; i++)
+      System.out.println(i + " \t\t\t " + dist[i]);
+  }
+
 
 }
 
