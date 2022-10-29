@@ -15,6 +15,10 @@ public class Edge implements Comparable<Edge>  {
         this.wall=wall;
     }
 
+    public Edge() {
+
+    }
+
     public int getSource() {
         return source;
     }

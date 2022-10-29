@@ -29,13 +29,14 @@ public class InterfaceUsuario {
 
     public void labirintotext(){
         System.out.println("-------LABIRINTO-------");
-        System.out.println("1 - Maze3");
-        System.out.println("2 - Maze10");
-        System.out.println("3 - Maze20");
-        System.out.println("4 - Maze30");
-        System.out.println("5 - Maze40");
-        System.out.println("6 - Maze50");
-        System.out.println("7 - SAIR");
+        System.out.println("1 - Toy");
+        System.out.println("2 - Maze3");
+        System.out.println("3 - Maze10");
+        System.out.println("4 - Maze20");
+        System.out.println("5 - Maze30");
+        System.out.println("6 - Maze40");
+        System.out.println("7 - Maze50");
+        System.out.println("8 - SAIR");
     }
     public void escolherInicio() {
         System.out.println("Digite o valor inicial");

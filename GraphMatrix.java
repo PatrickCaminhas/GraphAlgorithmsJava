@@ -245,7 +245,7 @@ public class GraphMatrix {
 
 
 
-  public void floydWarshall(int s, int t) {
+  public void floydWarshall(int source, int end) {
     int[][] dist = new int[this.countNodes][this.countNodes];
     int[][] pred = new int[this.countNodes][this.countNodes];
     for (int i = 0; i < this.adjMatrix.length; ++i) {
@@ -273,66 +273,20 @@ public class GraphMatrix {
       }
     }
     // Recovering paths
-    System.out.printf("Distance from %d to %d is: %d", s, t, dist[s][t]);
-    ArrayList<Integer> C = new ArrayList<Integer>();
-    C.add(t);
-    int aux = t;
-    while (aux != s) {
-      aux = pred[s][aux];
-      C.add(0, aux);
+    System.out.printf("Distance from %d to %d is: %d", source, end, dist[source][end]);
+    ArrayList<Integer> caminho = new ArrayList<Integer>();
+    caminho.add(end);
+    int aux = end;
+    while (aux != source) {
+      aux = pred[source][aux];
+      caminho.add(0, aux);
     }
-    System.out.println("Path: " + C);
+    System.out.println("Caminho de "+source+" até "+ end+ " vai passar  por" + caminho);
+
 
   }
   ///////////////////////////////////////
-  public void nearestNeighbor(final int[][] distanceMatrix, final int startCity){
-
-    path = new int[distanceMatrix[0].length];
-    for (int i = 0; i < path.length; i ++){
-      path[i] = Integer.MAX_VALUE;
-    }
-    path[0] = startCity;
-    int currentCity = startCity;
-    int i = 1;
-    while (i < path.length) {
-      int nextCity = findMin(distanceMatrix[currentCity]);
-      if (nextCity != -1) {
-        path[i] = nextCity;
-        currentCity = nextCity;
-        i++;
-      }
-    }
-  }
-
-  private int findMin(int[] row) {
-//encontro o menor custo
-//na linha passada por parametro (int[] row)
-    int proximaCidade = -1;
-    int i = 0;
-    int min = Integer.MAX_VALUE;
-
-    while (i < row.length) {
-//se a cidade não está no caminho e o custo dela for menor que min
-//min passa a ser o custo de row[i] e a proxima cidade passa a ser i
-      if (!isCityInPath(path, i) && row[i] < min) {
-        min = row[i];
-        proximaCidade = i;
-      }
-      i++;
-    }
-    return proximaCidade;
-  }
-  public int[] getPath() {
-    return path;
-  }
-  public boolean isCityInPath(int[] path, int city) {
-    for (int i = 0; i < path.length; i++) {
-      if (path[i] == city) {
-        return true;
-      }
-    }
-    return false;
-  }
+//Labirinto
 
 
 

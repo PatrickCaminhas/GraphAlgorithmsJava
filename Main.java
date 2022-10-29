@@ -13,6 +13,7 @@ public class Main {
     int source=0, end=0;
 
     GraphMatrix grafomatriz;
+    maze labirinto = new maze();
 
     Scanner leitor = new Scanner(System.in);
     InterfaceUsuario m = new InterfaceUsuario();
@@ -177,7 +178,9 @@ public class Main {
                       grafolist.bellmanFord(source,end);
                       System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
                       break;
-
+                    case 7:
+                      System.out.println("Saindo do algoritmo de Bellman-Ford...");
+                      break;
                     default:
                       System.out.println("Opção incorreta. Tente novamente!");
 
@@ -343,7 +346,10 @@ public class Main {
                 }while(terceiraopcao!=7);
                 break;
               case 5:
+              case 7:
+                System.out.println("Saindo dos algoritmos de caminho minimo...");
                 break;
+
               default:
             }
           }while(segundaopcao!=5);
@@ -353,34 +359,50 @@ public class Main {
           do{
             m.labirintotext();
             segundaopcao=leitor.nextInt();
-            System.out.println("FUNÇÃO A SER IMPLEMENTADA");
             switch (segundaopcao){
               //LABIRINTO
               case 1:
-                System.out.println("CAMINHO 1 NÃO USADO");
+                tempoInicial = System.currentTimeMillis();
+                labirinto.abrirLabirinto("mazetoy.txt");
+                System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
                 break;
               case 2:
-                System.out.println("CAMINHO 2 NÃO USADO");
+                tempoInicial = System.currentTimeMillis();
+                labirinto.abrirLabirinto("maze3.txt");
+                System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
                 break;
               case 3:
-                System.out.println("CAMINHO 3 NÃO USADO");
+                tempoInicial = System.currentTimeMillis();
+                labirinto.abrirLabirinto("maze10.txt");
+                System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
                 break;
               case 4:
-                System.out.println("CAMINHO 4 NÃO USADO");
+                tempoInicial = System.currentTimeMillis();
+               labirinto.abrirLabirinto("maze20.txt");
+                System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
                 break;
               case 5:
-                System.out.println("CAMINHO 5 NÃO USADO");
+                tempoInicial = System.currentTimeMillis();
+                labirinto.abrirLabirinto("maze30.txt");
+                System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
                 break;
               case 6:
-                System.out.println("CAMINHO 5 NÃO USADO");
+                tempoInicial = System.currentTimeMillis();
+                 labirinto.abrirLabirinto("maze40.txt");
+                System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
                 break;
               case 7:
+                tempoInicial = System.currentTimeMillis();
+                labirinto.abrirLabirinto("maze50.txt");
+                System.out.println("O método foi executado em " + ((System.currentTimeMillis() - tempoInicial)*0.001) + " segundos");
+                break;
+              case 8:
                 System.out.println("Saindo algoritmo do labirinto...");
                 break;
 
               default:
             }
-          }while(segundaopcao!=7);
+          }while(segundaopcao!=8);
 
 
 

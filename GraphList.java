@@ -348,52 +348,12 @@ public class GraphList {
         }
         return T;
     }
-/*
-    public void dijkstra(int src) {
-        this.adjList = adj;
 
-        for (int i = 0; i < V; i++)
-            dist[i] = Integer.MAX_VALUE;
-
-        // Add source node to the priority queue
-        pq.add(new Node(src, 0));
-
-        // Distance to the source is 0
-        dist[src] = 0;
-
-        while (settled.size() != V) {
-
-            // Terminating condition check when
-            // the priority queue is empty, return
-            if (pq.isEmpty())
-                return;
-
-            // Removing the minimum distance node
-            // from the priority queue
-            int u = pq.remove().node;
-
-            // Adding the node whose distance is
-            // finalized
-            if (settled.contains(u))
-
-                // Continue keyword skips execution for
-                // following check
-                continue;
-
-            // We don't have to call e_Neighbors(u)
-            // if u is already present in the settled set.
-            settled.add(u);
-
-            e_Neighbours(u);
-        }
-
-    }
-*/
 public void bellmanFord(int source, int end){
-    long start = System.currentTimeMillis();
     int[] pred = new int[this.countNodes];
     int[] dist = new int[this.countNodes];
-
+    ArrayList<Integer> caminho = new ArrayList<Integer>();
+    int aux = end;
     for (int i = 0; i < this.countNodes; i++) {
         dist[i] = INF;
         pred[i] = -1;
@@ -401,6 +361,7 @@ public void bellmanFord(int source, int end){
     dist[source] = 0;
 
     for (int i = 0; i < this.countNodes; i++) {
+
         for (Edge edge : edgeList) {
             if (dist[edge.getSink()] > dist[edge.getSource()] + edge.getWeight()) {
                 dist[edge.getSink()] = dist[edge.getSource()] + edge.getWeight();
@@ -410,31 +371,29 @@ public void bellmanFord(int source, int end){
     }
 
 
-    System.out.printf("Distância entre %d e %d: %d   ", source,end,dist[end]);
-    ArrayList<Integer> caminho = new ArrayList<Integer>();
-    int aux = end;
+
+
     caminho.add(end);
     while(aux != source){
         aux = pred[aux];
         caminho.add(0,aux);
     }
-    System.out.println("Caminho: " + caminho);
+    System.out.println("Caminho de "+source+" até "+ end+ " vai passar  por" + caminho);
 
-    long elapsed = System.currentTimeMillis() - start;
-    System.out.println("\nTempo de execução: " + elapsed + " ms");
 }
 
 
-    public void improvedBellmanFord(int s, int t){
-        long start = System.currentTimeMillis();
+    public void improvedBellmanFord(int source, int end){
         int[] pred = new int[this.countNodes];
         int[] dist = new int[this.countNodes];
+        ArrayList<Integer> caminho = new ArrayList<Integer>();
+        int aux = end;
         boolean trocou=false;
         for (int i = 0; i < this.countNodes; i++) {
             dist[i] = INF;
             pred[i] = -1;
         }
-        dist[s] = 0;
+        dist[source] = 0;
 
         for (int i = 0; i < this.countNodes; i++) {
             trocou=false;
@@ -445,56 +404,56 @@ public void bellmanFord(int source, int end){
                     trocou=true;
                 }
             }
+            if(!trocou){
+                break;
+            }
         }
 
 
-        System.out.printf("Distância entre %d e %d: %d   ", s,t,dist[t]);
-        ArrayList<Integer> caminho = new ArrayList<Integer>();
-        int aux = t;
-        caminho.add(t);
-        while(aux != s){
+
+
+        caminho.add(end);
+        while(aux != source){
             aux = pred[aux];
             caminho.add(0,aux);
         }
-        System.out.println("Caminho: " + caminho);
+        System.out.println("Caminho de "+source+" até "+ end+ " vai passar  por" + caminho);
 
-        long elapsed = System.currentTimeMillis() - start;
-        System.out.println("\nTempo de execução: " + elapsed + " ms");
+
     }
 
 
     public int menorDistanciaList(int dist[],  ArrayList<Integer> q) {
 
         int shortest = dist[q.get(0)];
-        int u = q.get(0);
+        int result = q.get(0);
 
         for (int i = 0; i < this.countNodes; i++) {
             if(q.contains(i)){
                 if(dist[i] < shortest){
                     shortest = dist[i];
-                    u = i;
+                    result = i;
                 }
             }
         }
-        return u;
+        return result;
     }
 
-    public void dijkstra(int source, int sink) {
-        ArrayList<Integer> q = new ArrayList<Integer>();
+    public void dijkstra(int source, int end) {
+        ArrayList<Integer> Q = new ArrayList<Integer>();
+        ArrayList<Integer> caminho = new ArrayList<Integer>();
         int[] pred = new int[this.countNodes];
         int[] dist = new int[this.countNodes];
 
         for (int i = 0; i < this.countNodes; i++) {
-            q.add(i);
+            Q.add(i);
             dist[i] = INF;
 
         }
-
         dist[source] = 0;
-
-        while(q.size()!=0){
-            Integer u = menorDistanciaList(dist,q);
-            q.remove(u);
+        while(Q.size()!=0){
+            Integer u = menorDistanciaList(dist,Q);
+            Q.remove(u);
 
             for (int i = 0; i < this.adjList.get(u).size(); i++) {
                 if(dist[this.adjList.get(u).get(i).getSink()] > dist[u] + this.adjList.get(u).get(i).getWeight()){
@@ -505,16 +464,14 @@ public void bellmanFord(int source, int end){
         }
 
 
-        System.out.printf("Distância entre %d e %d: %d   ", source,sink,dist[sink]);
-        ArrayList<Integer> caminho = new ArrayList<Integer>();
-        int aux = sink;
-        caminho.add(sink);
-        while(aux != source){
-            aux = pred[aux];
-            caminho.add(0,aux);
-        }
-        System.out.println("Caminho: " + caminho);
 
+        int si = end;
+        caminho.add(end);
+        while(si != source){
+            si = pred[si];
+            caminho.add(0,si);
+        }
+        System.out.println("Caminho de "+source+" até "+ end+ " vai passar  por" + caminho);
     }
 
 
